@@ -1,7 +1,7 @@
 import iziToast from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 
-import getImagesByQuery from './js/pixabay-api'
+import fetchImages from './js/pixabay-api'
 import {
 	clearGallery,
 	createGallery,
@@ -9,58 +9,50 @@ import {
 	showLoader,
 } from './js/render-functions'
 
-const searchForm = document.querySelector('.search-container')
+const searchForm = document.querySelector('.search-form')
 
-searchForm.addEventListener('submit', handleSearch)
+const showNotification = (message, type = 'error') => {
+	iziToast[type]({
+		message,
+		position: 'topRight',
+		messageSize: '16px',
+		messageLineHeight: '24px',
+		messageColor: '#fafafb',
+		closeOnClick: true,
+	})
+}
 
-function handleSearch(event) {
+const handleSearch = async event => {
 	event.preventDefault()
 
-	const searchQuery = event.target.elements['search-text'].value.trim()
+	const searchQuery = event.target.elements.searchQuery.value.trim()
 
 	if (!searchQuery) {
-		showError('Please enter a search query')
+		showNotification('Please enter a search query')
 		return
 	}
 
 	clearGallery()
 	showLoader()
 
-	getImagesByQuery(searchQuery)
-		.then(({ hits }) => {
-			if (hits.length === 0) {
-				showInfo('No images found. Please try a different search term.')
-				return
-			}
-			createGallery(hits)
-		})
-		.catch(error => {
-			showError('Failed to fetch images. Please try again later.')
-		})
-		.finally(() => {
-			hideLoader()
-			event.target.reset()
-		})
+	try {
+		const { hits } = await fetchImages(searchQuery)
+
+		if (hits.length === 0) {
+			showNotification(
+				'No images found. Please try a different search term.',
+				'info'
+			)
+			return
+		}
+
+		createGallery(hits)
+	} catch (error) {
+		showNotification('Failed to fetch images. Please try again later.')
+	} finally {
+		hideLoader()
+		event.target.reset()
+	}
 }
 
-function showError(message) {
-	iziToast.error({
-		message,
-		position: 'topRight',
-		messageSize: '16px',
-		messageLineHeight: '24px',
-		messageColor: '#fafafb',
-		closeOnClick: true,
-	})
-}
-
-function showInfo(message) {
-	iziToast.info({
-		message,
-		position: 'topRight',
-		messageSize: '16px',
-		messageLineHeight: '24px',
-		messageColor: '#fafafb',
-		closeOnClick: true,
-	})
-}
+searchForm.addEventListener('submit', handleSearch)
