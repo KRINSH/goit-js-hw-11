@@ -1,27 +1,27 @@
-import SimpleLightbox from 'simplelightbox'
-import 'simplelightbox/dist/simple-lightbox.min.css'
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
-const loader = document.querySelector('.loader')
-const gallery = document.querySelector('.gallery')
+const loader = document.querySelector('.loader');
+const gallery = document.querySelector('.gallery');
 
 let simplelightbox = new SimpleLightbox('.gallery-link', {
-	captionsData: 'alt',
-	captionPosition: 'bottom',
-	captionDelay: 250,
-})
+  captionsData: 'alt',
+  captionPosition: 'bottom',
+  captionDelay: 250,
+});
 
-function buildPhotoGrid(images) {
-	const markup = images
-		.map(
-			({
-				webformatURL,
-				largeImageURL,
-				tags,
-				likes,
-				views,
-				comments,
-				downloads,
-			}) => `<li class="gallery-item">
+function createGallery(images) {
+  const markup = images
+    .map(
+      ({
+        webformatURL,
+        largeImageURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads,
+      }) => `<li class="gallery-item">
       <a class="gallery-link" href=${largeImageURL}>
       <div class="image-container">
         <img class="gallery-image" src="${webformatURL}" alt="${tags}" />
@@ -46,28 +46,23 @@ function buildPhotoGrid(images) {
         </div>
       </a>
     </li>`
-		)
-		.join('')
+    )
+    .join('');
 
-	gallery.innerHTML = markup
-	simplelightbox.refresh()
+  gallery.innerHTML = markup;
+  simplelightbox.refresh();
 }
 
-function emptyPhotoContainer() {
-	gallery.innerHTML = ''
+function clearGallery() {
+  gallery.innerHTML = '';
 }
 
-function activateSpinner() {
-	loader.classList.remove('hidden')
+function showLoader() {
+  loader.classList.remove('hidden');
 }
 
-function deactivateSpinner() {
-	loader.classList.add('hidden')
+function hideLoader() {
+  loader.classList.add('hidden');
 }
 
-export {
-	activateSpinner,
-	buildPhotoGrid,
-	deactivateSpinner,
-	emptyPhotoContainer,
-}
+export { createGallery, clearGallery, showLoader, hideLoader };
