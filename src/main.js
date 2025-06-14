@@ -9,7 +9,7 @@ import {
 	showLoader,
 } from './js/render-functions'
 
-const searchForm = document.querySelector('.search-form')
+const searchForm = document.querySelector('.form')
 
 const displayNotification = (message, type = 'error') => {
 	iziToast[type]({
