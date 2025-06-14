@@ -4,6 +4,10 @@ import 'simplelightbox/dist/simple-lightbox.min.css'
 const loader = document.querySelector('.loader')
 const gallery = document.querySelector('.gallery')
 
+if (!loader || !gallery) {
+	console.error('Required elements not found: .loader or .gallery')
+}
+
 let simplelightbox = new SimpleLightbox('.gallery-link', {
 	captionsData: 'alt',
 	captionPosition: 'bottom',
@@ -11,6 +15,8 @@ let simplelightbox = new SimpleLightbox('.gallery-link', {
 })
 
 function createGallery(images) {
+	if (!gallery) return
+
 	const markup = images.hits
 		.map(
 			({
@@ -54,14 +60,17 @@ function createGallery(images) {
 }
 
 function clearGallery() {
+	if (!gallery) return
 	gallery.innerHTML = ''
 }
 
 function showLoader() {
+	if (!loader) return
 	loader.classList.remove('hidden')
 }
 
 function hideLoader() {
+	if (!loader) return
 	loader.classList.add('hidden')
 }
 

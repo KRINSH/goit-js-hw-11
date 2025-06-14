@@ -28,8 +28,8 @@ form.addEventListener('submit', async event => {
 	showLoader()
 
 	try {
-		const images = await getImagesByQuery(query)
-		if (images.length === 0) {
+		const response = await getImagesByQuery(query)
+		if (response.hits.length === 0) {
 			iziToast.info({
 				title: 'Info',
 				message:
@@ -37,7 +37,7 @@ form.addEventListener('submit', async event => {
 				position: 'topRight',
 			})
 		} else {
-			createGallery(images)
+			createGallery(response)
 		}
 	} catch (error) {
 		iziToast.error({
