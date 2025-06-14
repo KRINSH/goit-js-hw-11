@@ -32,27 +32,20 @@ const generateImageCard = ({
 	</li>
 `
 
-const displayImages = images => {
+export function createGallery(images) {
 	const markup = images.map(generateImageCard).join('')
 	galleryContainer.innerHTML = markup
 	lightboxInstance.refresh()
 }
 
-const clearImages = () => {
+export function clearGallery() {
 	galleryContainer.innerHTML = ''
 }
 
-const showSpinner = () => {
+export function showLoader() {
 	loadingSpinner.classList.remove('hidden')
 }
 
-const hideSpinner = () => {
+export function hideLoader() {
 	loadingSpinner.classList.add('hidden')
-}
-
-export {
-	clearImages as clearGallery,
-	displayImages as createGallery,
-	hideSpinner as hideLoader,
-	showSpinner as showLoader,
 }

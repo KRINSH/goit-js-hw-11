@@ -1,20 +1,28 @@
+/* Container styles */
+.container {
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 15px;
+}
+
 /* Styles for Mobile devices */
 .container {
-  position: relative;
-  min-width: 320px;
-  max-width: 375px;
-  margin: 0 auto;
-  padding: 36px 16px;
+	position: relative;
+	min-width: 320px;
+	max-width: 375px;
+	margin: 0 auto;
+	padding: 36px 16px;
 }
 /* Styles for Tablet devices */
 @media only screen and (min-width: 768px) {
-  .container {
-    max-width: 768px;
-  }
+	.container {
+		max-width: 768px;
+	}
 }
 /* Styles for Desktop devices */
 @media only screen and (min-width: 1140px) {
-  .container {
-    max-width: 1140px;
-  }
+	.container {
+		max-width: 1140px;
+	}
 }
