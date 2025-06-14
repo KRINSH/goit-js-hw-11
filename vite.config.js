@@ -12,7 +12,7 @@ export default defineConfig(({ command }) => {
 		base: '/goit-js-hw-11/',
 		build: {
 			sourcemap: true,
-			outDir: 'dist',
+			outDir: '../dist',
 			assetsDir: 'assets',
 			rollupOptions: {
 				input: {
