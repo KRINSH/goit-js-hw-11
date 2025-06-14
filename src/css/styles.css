@@ -60,38 +60,37 @@
 	background-color: #357abd;
 }
 
-.photo-grid {
+.gallery {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 	gap: 20px;
-	padding: 20px 0;
+	padding: 20px;
+	list-style: none;
 }
 
-.photo-card {
-	background: white;
-	border-radius: 12px;
+.gallery-item {
+	border-radius: 8px;
 	overflow: hidden;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	transition: transform 0.3s ease;
 }
 
-.photo-card:hover {
-	transform: translateY(-5px);
+.gallery-item:hover {
+	transform: scale(1.02);
 }
 
-.photo-link {
+.gallery-link {
 	text-decoration: none;
 	color: inherit;
-	display: block;
 }
 
-.photo-image-wrapper {
+.image-container {
 	position: relative;
 	padding-top: 75%;
 	overflow: hidden;
 }
 
-.photo-image {
+.gallery-image {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -100,46 +99,39 @@
 	object-fit: cover;
 }
 
-.photo-info {
+.image-inform {
 	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	gap: 12px;
-	padding: 15px;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 10px;
+	padding: 10px;
 	background-color: #f8f9fa;
 }
 
-.info-item {
-	display: flex;
-	flex-direction: column;
-	gap: 4px;
-}
-
-.info-label {
+.image-inform-title {
 	font-size: 12px;
 	color: #6c757d;
-	text-transform: uppercase;
-	letter-spacing: 0.5px;
+	margin: 0;
 }
 
-.info-value {
-	font-size: 16px;
-	font-weight: 600;
+.image-inform-text {
+	font-size: 14px;
+	font-weight: 500;
 	color: #212529;
 }
 
-.loading-indicator {
-	width: 40px;
-	height: 40px;
-	border: 4px solid #f3f3f3;
-	border-top: 4px solid #4a90e2;
+.loader {
+	display: none;
+	width: 48px;
+	height: 48px;
+	border: 5px solid #f3f3f3;
+	border-top: 5px solid #3498db;
 	border-radius: 50%;
 	margin: 20px auto;
 	animation: spin 1s linear infinite;
-	display: none;
 }
 
-.loading-indicator.visible {
-	display: block;
+.loader.hidden {
+	display: none;
 }
 
 @keyframes spin {
@@ -149,6 +141,39 @@
 	100% {
 		transform: rotate(360deg);
 	}
+}
+
+.form {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	padding: 20px;
+	background-color: #f8f9fa;
+	border-radius: 8px;
+	margin: 20px;
+}
+
+.form input {
+	padding: 10px;
+	border: 1px solid #ced4da;
+	border-radius: 4px;
+	font-size: 16px;
+	min-width: 300px;
+}
+
+.form button {
+	padding: 10px 20px;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 16px;
+	transition: background-color 0.3s ease;
+}
+
+.form button:hover {
+	background-color: #0056b3;
 }
 
 .hidden {
