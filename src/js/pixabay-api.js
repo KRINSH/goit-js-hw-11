@@ -3,21 +3,19 @@ import axios from 'axios'
 const API_KEY = '36979931-b9ebd2c49fac6caefdf5e0dc3'
 const BASE_URL = 'https://pixabay.com/api/'
 
-const searchImages = async searchTerm => {
-	const requestParams = {
+export async function getImagesByQuery(query) {
+	const params = {
 		key: API_KEY,
-		q: searchTerm,
+		q: query,
 		image_type: 'photo',
 		orientation: 'horizontal',
 		safesearch: true,
 	}
 
 	try {
-		const response = await axios.get(BASE_URL, { params: requestParams })
+		const response = await axios.get(BASE_URL, { params })
 		return response.data
 	} catch (error) {
 		throw new Error('Failed to fetch images')
 	}
 }
-
-export default searchImages

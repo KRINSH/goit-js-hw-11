@@ -1,7 +1,7 @@
 import iziToast from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 
-import searchImages from './js/pixabay-api'
+import { getImagesByQuery } from './js/pixabay-api'
 import {
 	clearGallery,
 	createGallery,
@@ -36,11 +36,11 @@ const handleFormSubmit = async event => {
 	showLoader()
 
 	try {
-		const { hits } = await searchImages(searchQuery)
+		const { hits } = await getImagesByQuery(searchQuery)
 
 		if (hits.length === 0) {
 			displayNotification(
-				'No images found. Please try a different search term.',
+				'Sorry, there are no images matching your search query. Please try again!',
 				'info'
 			)
 			return
