@@ -60,37 +60,38 @@
 	background-color: #357abd;
 }
 
-.gallery {
+.photo-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 	gap: 20px;
-	padding: 20px;
-	list-style: none;
+	padding: 20px 0;
 }
 
-.gallery-item {
-	border-radius: 8px;
+.photo-card {
+	background: white;
+	border-radius: 12px;
 	overflow: hidden;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	transition: transform 0.3s ease;
 }
 
-.gallery-item:hover {
-	transform: scale(1.02);
+.photo-card:hover {
+	transform: translateY(-5px);
 }
 
-.gallery-link {
+.photo-link {
 	text-decoration: none;
 	color: inherit;
+	display: block;
 }
 
-.image-container {
+.photo-image-wrapper {
 	position: relative;
 	padding-top: 75%;
 	overflow: hidden;
 }
 
-.gallery-image {
+.photo-image {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -99,39 +100,46 @@
 	object-fit: cover;
 }
 
-.image-inform {
+.photo-info {
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	gap: 10px;
-	padding: 10px;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 12px;
+	padding: 15px;
 	background-color: #f8f9fa;
 }
 
-.image-inform-title {
-	font-size: 12px;
-	color: #6c757d;
-	margin: 0;
+.info-item {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
 }
 
-.image-inform-text {
-	font-size: 14px;
-	font-weight: 500;
+.info-label {
+	font-size: 12px;
+	color: #6c757d;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.info-value {
+	font-size: 16px;
+	font-weight: 600;
 	color: #212529;
 }
 
-.loader {
-	display: none;
-	width: 48px;
-	height: 48px;
-	border: 5px solid #f3f3f3;
-	border-top: 5px solid #3498db;
+.loading-indicator {
+	width: 40px;
+	height: 40px;
+	border: 4px solid #f3f3f3;
+	border-top: 4px solid #4a90e2;
 	border-radius: 50%;
 	margin: 20px auto;
 	animation: spin 1s linear infinite;
+	display: none;
 }
 
-.loader.hidden {
-	display: none;
+.loading-indicator.visible {
+	display: block;
 }
 
 @keyframes spin {
@@ -143,45 +151,6 @@
 	}
 }
 
-.form {
-	display: flex;
-	justify-content: center;
-	gap: 10px;
-	padding: 20px;
-	background-color: #f8f9fa;
-	border-radius: 8px;
-	margin: 20px;
-}
-
-.form input {
-	padding: 10px;
-	border: 1px solid #ced4da;
-	border-radius: 4px;
-	font-size: 16px;
-	min-width: 300px;
-}
-
-.form button {
-	padding: 10px 20px;
-	background-color: #007bff;
-	color: white;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-	font-size: 16px;
-	transition: background-color 0.3s ease;
-}
-
-.form button:hover {
-	background-color: #0056b3;
-}
-
 .hidden {
 	display: none;
-}
-
-.container {
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 20px;
 }
