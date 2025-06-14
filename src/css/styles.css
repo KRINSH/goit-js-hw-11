@@ -66,7 +66,6 @@
 	gap: 20px;
 	padding: 20px;
 	list-style: none;
-	margin: 0;
 }
 
 .gallery-item {
@@ -74,7 +73,6 @@
 	overflow: hidden;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	transition: transform 0.3s ease;
-	background-color: #fff;
 }
 
 .gallery-item:hover {
@@ -84,7 +82,6 @@
 .gallery-link {
 	text-decoration: none;
 	color: inherit;
-	display: block;
 }
 
 .image-container {
@@ -114,14 +111,12 @@
 	font-size: 12px;
 	color: #6c757d;
 	margin: 0;
-	text-align: center;
 }
 
 .image-inform-text {
 	font-size: 14px;
 	font-weight: 500;
 	color: #212529;
-	text-align: center;
 }
 
 .loader {
