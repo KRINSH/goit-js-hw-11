@@ -1,70 +1,68 @@
-import SimpleLightbox from 'simplelightbox'
-import 'simplelightbox/dist/simple-lightbox.min.css'
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
-const loadingIndicator = document.querySelector('.loading-indicator')
-const photoGrid = document.querySelector('.photo-grid')
+const loader = document.querySelector('.loader');
+const gallery = document.querySelector('.gallery');
 
-const lightbox = new SimpleLightbox('.photo-link', {
-	captionsData: 'alt',
-	captionPosition: 'bottom',
-	captionDelay: 250,
-})
+let simplelightbox = new SimpleLightbox('.gallery-link', {
+  captionsData: 'alt',
+  captionPosition: 'bottom',
+  captionDelay: 250,
+});
 
 function createGallery(images) {
-	const markup = images
-		.map(
-			({
-				webformatURL,
-				largeImageURL,
-				tags,
-				likes,
-				views,
-				comments,
-				downloads,
-			}) => `
-        <div class="photo-card">
-          <a class="photo-link" href="${largeImageURL}">
-            <div class="photo-image-wrapper">
-              <img class="photo-image" src="${webformatURL}" alt="${tags}" />
-            </div>
-            <div class="photo-info">
-              <div class="info-item">
-                <span class="info-label">Likes</span>
-                <span class="info-value">${likes}</span>
-              </div>
-              <div class="info-item">
-                <span class="info-label">Views</span>
-                <span class="info-value">${views}</span>
-              </div>
-              <div class="info-item">
-                <span class="info-label">Comments</span>
-                <span class="info-value">${comments}</span>
-              </div>
-              <div class="info-item">
-                <span class="info-label">Downloads</span>
-                <span class="info-value">${downloads}</span>
-              </div>
-            </div>
-          </a>
+  const markup = images
+    .map(
+      ({
+        webformatURL,
+        largeImageURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads,
+      }) => `<li class="gallery-item">
+      <a class="gallery-link" href=${largeImageURL}>
+      <div class="image-container">
+        <img class="gallery-image" src="${webformatURL}" alt="${tags}" />
         </div>
-      `
-		)
-		.join('')
+        <div class="image-inform">
+          <div>
+            <h3 class="image-inform-title">Likes</h3>
+            <span class="image-inform-text">${likes}</span>
+          </div>
+          <div>
+            <h3 class="image-inform-title">Views</h3>
+            <span class="image-inform-text">${views}</span>
+          </div>
+          <div>
+            <h3 class="image-inform-title">Comments</h3>
+            <span class="image-inform-text">${comments}</span>
+          </div>
+          <div>
+            <h3 class="image-inform-title">Downloads</h3>
+            <span class="image-inform-text">${downloads}</span>
+          </div>
+        </div>
+      </a>
+    </li>`
+    )
+    .join('');
 
-	photoGrid.innerHTML = markup
-	lightbox.refresh()
+  gallery.innerHTML = markup;
+  simplelightbox.refresh();
 }
 
 function clearGallery() {
-	photoGrid.innerHTML = ''
+  gallery.innerHTML = '';
 }
 
 function showLoader() {
-	loadingIndicator.classList.add('visible')
+  loader.classList.remove('hidden');
 }
 
 function hideLoader() {
-	loadingIndicator.classList.remove('visible')
+  loader.classList.add('hidden');
 }
 
-export { clearGallery, createGallery, hideLoader, showLoader }
+export { createGallery, clearGallery, showLoader, hideLoader };
