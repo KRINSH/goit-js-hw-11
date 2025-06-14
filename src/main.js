@@ -1,24 +1,24 @@
 import iziToast from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 
-import fetchImageGallery from './js/pixabay-api'
+import getImagesByQuery from './js/pixabay-api'
 import {
-	displayLoader,
-	hideLoadingIndicator,
-	renderImageGallery,
-	resetGallery,
+	clearGallery,
+	createGallery,
+	hideLoader,
+	showLoader,
 } from './js/render-functions'
 
 const searchForm = document.querySelector('.search-form')
 
 searchForm.addEventListener('submit', handleImageSearch)
 
-hideLoadingIndicator()
+hideLoader()
 
 function handleImageSearch(event) {
 	event.preventDefault()
-	resetGallery()
-	displayLoader()
+	clearGallery()
+	showLoader()
 	const searchQuery = event.target.elements['search-text'].value.trim()
 
 	if (!searchQuery) {
@@ -30,11 +30,11 @@ function handleImageSearch(event) {
 			closeOnClick: true,
 			position: 'topRight',
 		})
-		hideLoadingIndicator()
+		hideLoader()
 		return
 	}
 
-	fetchImageGallery(searchQuery)
+	getImagesByQuery(searchQuery)
 		.then(({ hits }) => {
 			if (hits.length === 0) {
 				iziToast.error({
@@ -46,10 +46,10 @@ function handleImageSearch(event) {
 					closeOnClick: true,
 					position: 'topRight',
 				})
-				hideLoadingIndicator()
+				hideLoader()
 				return
 			}
-			renderImageGallery(hits)
+			createGallery(hits)
 		})
 		.catch(error =>
 			iziToast.error({
@@ -59,7 +59,7 @@ function handleImageSearch(event) {
 			})
 		)
 		.finally(() => {
-			hideLoadingIndicator()
+			hideLoader()
 			searchForm.reset()
 		})
 }

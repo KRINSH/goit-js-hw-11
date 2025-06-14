@@ -9,7 +9,7 @@
 @import './base.css';
 @import './container.css';
 @import './search-form.css';
-@import './loading-indicator.css';
+@import './loader.css';
 
 /* Sections style */
 @import url('./loader.css');

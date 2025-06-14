@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const API_KEY = '36979931-b9ebd2c49fac6caefdf5e0dc3'
 
-function fetchImageGallery(query) {
+function getImagesByQuery(query) {
 	return axios
 		.get(`https://pixabay.com/api/`, {
 			params: {
@@ -16,4 +16,4 @@ function fetchImageGallery(query) {
 		.then(resp => resp.data)
 }
 
-export default fetchImageGallery
+export default getImagesByQuery

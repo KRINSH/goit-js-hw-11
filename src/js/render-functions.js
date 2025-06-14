@@ -1,8 +1,8 @@
 import SimpleLightbox from 'simplelightbox'
 import 'simplelightbox/dist/simple-lightbox.min.css'
 
-const loadingIndicator = document.querySelector('.loading-indicator')
-const imageGallery = document.querySelector('.image-gallery')
+const loader = document.querySelector('.loading-indicator')
+const gallery = document.querySelector('.image-gallery')
 
 let simplelightbox = new SimpleLightbox('.gallery-link', {
 	captionsData: 'alt',
@@ -10,7 +10,7 @@ let simplelightbox = new SimpleLightbox('.gallery-link', {
 	captionDelay: 250,
 })
 
-function renderImageGallery(images) {
+function createGallery(images) {
 	const markup = images
 		.map(
 			({
@@ -26,22 +26,22 @@ function renderImageGallery(images) {
       <div class="image-container">
         <img class="gallery-image" src="${webformatURL}" alt="${tags}" />
         </div>
-        <div class="image-info">
-          <div class="info-item">
-            <h3 class="info-title">Likes</h3>
-            <span class="info-text">${likes}</span>
+        <div class="image-inform">
+          <div>
+            <h3 class="image-inform-title">Likes</h3>
+            <span class="image-inform-text">${likes}</span>
           </div>
-          <div class="info-item">
-            <h3 class="info-title">Views</h3>
-            <span class="info-text">${views}</span>
+          <div>
+            <h3 class="image-inform-title">Views</h3>
+            <span class="image-inform-text">${views}</span>
           </div>
-          <div class="info-item">
-            <h3 class="info-title">Comments</h3>
-            <span class="info-text">${comments}</span>
+          <div>
+            <h3 class="image-inform-title">Comments</h3>
+            <span class="image-inform-text">${comments}</span>
           </div>
-          <div class="info-item">
-            <h3 class="info-title">Downloads</h3>
-            <span class="info-text">${downloads}</span>
+          <div>
+            <h3 class="image-inform-title">Downloads</h3>
+            <span class="image-inform-text">${downloads}</span>
           </div>
         </div>
       </a>
@@ -49,20 +49,20 @@ function renderImageGallery(images) {
 		)
 		.join('')
 
-	imageGallery.innerHTML = markup
+	gallery.innerHTML = markup
 	simplelightbox.refresh()
 }
 
-function resetGallery() {
-	imageGallery.innerHTML = ''
+function clearGallery() {
+	gallery.innerHTML = ''
 }
 
-function displayLoader() {
-	loadingIndicator.classList.remove('hidden')
+function showLoader() {
+	loader.classList.remove('hidden')
 }
 
-function hideLoadingIndicator() {
-	loadingIndicator.classList.add('hidden')
+function hideLoader() {
+	loader.classList.add('hidden')
 }
 
-export { displayLoader, hideLoadingIndicator, renderImageGallery, resetGallery }
+export { clearGallery, createGallery, hideLoader, showLoader }
