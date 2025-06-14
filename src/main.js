@@ -1,51 +1,49 @@
 import iziToast from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 
-import fetchImageData from './js/pixabay-api'
+import getImagesByQuery from './js/pixabay-api'
 import {
-	displayGallery,
-	displayLoadingIndicator,
-	removeGalleryContent,
-	removeLoadingIndicator,
+	clearGallery,
+	createGallery,
+	hideLoader,
+	showLoader,
 } from './js/render-functions'
 
-const imageSearchForm = document.querySelector('.search-container')
+const searchForm = document.querySelector('.search-container')
 
-imageSearchForm.addEventListener('submit', processImageSearch)
+searchForm.addEventListener('submit', handleSearch)
 
-function processImageSearch(event) {
+function handleSearch(event) {
 	event.preventDefault()
 
-	const searchInput = event.target.elements['search-text'].value.trim()
+	const searchQuery = event.target.elements['search-text'].value.trim()
 
-	if (!searchInput) {
-		displayErrorMessage('Please enter a search query')
+	if (!searchQuery) {
+		showError('Please enter a search query')
 		return
 	}
 
-	removeGalleryContent()
-	displayLoadingIndicator()
+	clearGallery()
+	showLoader()
 
-	fetchImageData(searchInput)
+	getImagesByQuery(searchQuery)
 		.then(({ hits }) => {
 			if (hits.length === 0) {
-				displayInfoMessage(
-					'No images found. Please try a different search term.'
-				)
+				showInfo('No images found. Please try a different search term.')
 				return
 			}
-			displayGallery(hits)
+			createGallery(hits)
 		})
 		.catch(error => {
-			displayErrorMessage('Failed to fetch images. Please try again later.')
+			showError('Failed to fetch images. Please try again later.')
 		})
 		.finally(() => {
-			removeLoadingIndicator()
+			hideLoader()
 			event.target.reset()
 		})
 }
 
-function displayErrorMessage(message) {
+function showError(message) {
 	iziToast.error({
 		message,
 		position: 'topRight',
@@ -56,7 +54,7 @@ function displayErrorMessage(message) {
 	})
 }
 
-function displayInfoMessage(message) {
+function showInfo(message) {
 	iziToast.info({
 		message,
 		position: 'topRight',

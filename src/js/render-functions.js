@@ -1,17 +1,17 @@
 import SimpleLightbox from 'simplelightbox'
 import 'simplelightbox/dist/simple-lightbox.min.css'
 
-const loadingSpinner = document.querySelector('.loading-indicator')
-const imageGallery = document.querySelector('.photo-grid')
+const loadingIndicator = document.querySelector('.loading-indicator')
+const photoGrid = document.querySelector('.photo-grid')
 
-const galleryViewer = new SimpleLightbox('.photo-link', {
+const lightbox = new SimpleLightbox('.photo-link', {
 	captionsData: 'alt',
 	captionPosition: 'bottom',
 	captionDelay: 250,
 })
 
-function displayGallery(images) {
-	const galleryMarkup = images
+function createGallery(images) {
+	const markup = images
 		.map(
 			({
 				webformatURL,
@@ -51,25 +51,20 @@ function displayGallery(images) {
 		)
 		.join('')
 
-	imageGallery.innerHTML = galleryMarkup
-	galleryViewer.refresh()
+	photoGrid.innerHTML = markup
+	lightbox.refresh()
 }
 
-function removeGalleryContent() {
-	imageGallery.innerHTML = ''
+function clearGallery() {
+	photoGrid.innerHTML = ''
 }
 
-function displayLoadingIndicator() {
-	loadingSpinner.classList.add('visible')
+function showLoader() {
+	loadingIndicator.classList.add('visible')
 }
 
-function removeLoadingIndicator() {
-	loadingSpinner.classList.remove('visible')
+function hideLoader() {
+	loadingIndicator.classList.remove('visible')
 }
 
-export {
-	displayGallery,
-	displayLoadingIndicator,
-	removeGalleryContent,
-	removeLoadingIndicator,
-}
+export { clearGallery, createGallery, hideLoader, showLoader }
