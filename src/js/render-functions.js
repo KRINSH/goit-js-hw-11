@@ -1,68 +1,68 @@
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
+import SimpleLightbox from 'simplelightbox'
+import 'simplelightbox/dist/simple-lightbox.min.css'
 
-const loader = document.querySelector('.loader');
-const gallery = document.querySelector('.gallery');
+const loadingIndicator = document.querySelector('.loading-indicator')
+const imageGallery = document.querySelector('.image-gallery')
 
 let simplelightbox = new SimpleLightbox('.gallery-link', {
-  captionsData: 'alt',
-  captionPosition: 'bottom',
-  captionDelay: 250,
-});
+	captionsData: 'alt',
+	captionPosition: 'bottom',
+	captionDelay: 250,
+})
 
-function createGallery(images) {
-  const markup = images
-    .map(
-      ({
-        webformatURL,
-        largeImageURL,
-        tags,
-        likes,
-        views,
-        comments,
-        downloads,
-      }) => `<li class="gallery-item">
+function renderImageGallery(images) {
+	const markup = images
+		.map(
+			({
+				webformatURL,
+				largeImageURL,
+				tags,
+				likes,
+				views,
+				comments,
+				downloads,
+			}) => `<li class="gallery-item">
       <a class="gallery-link" href=${largeImageURL}>
       <div class="image-container">
         <img class="gallery-image" src="${webformatURL}" alt="${tags}" />
         </div>
-        <div class="image-inform">
-          <div>
-            <h3 class="image-inform-title">Likes</h3>
-            <span class="image-inform-text">${likes}</span>
+        <div class="image-info">
+          <div class="info-item">
+            <h3 class="info-title">Likes</h3>
+            <span class="info-text">${likes}</span>
           </div>
-          <div>
-            <h3 class="image-inform-title">Views</h3>
-            <span class="image-inform-text">${views}</span>
+          <div class="info-item">
+            <h3 class="info-title">Views</h3>
+            <span class="info-text">${views}</span>
           </div>
-          <div>
-            <h3 class="image-inform-title">Comments</h3>
-            <span class="image-inform-text">${comments}</span>
+          <div class="info-item">
+            <h3 class="info-title">Comments</h3>
+            <span class="info-text">${comments}</span>
           </div>
-          <div>
-            <h3 class="image-inform-title">Downloads</h3>
-            <span class="image-inform-text">${downloads}</span>
+          <div class="info-item">
+            <h3 class="info-title">Downloads</h3>
+            <span class="info-text">${downloads}</span>
           </div>
         </div>
       </a>
     </li>`
-    )
-    .join('');
+		)
+		.join('')
 
-  gallery.innerHTML = markup;
-  simplelightbox.refresh();
+	imageGallery.innerHTML = markup
+	simplelightbox.refresh()
 }
 
-function clearGallery() {
-  gallery.innerHTML = '';
+function resetGallery() {
+	imageGallery.innerHTML = ''
 }
 
-function showLoader() {
-  loader.classList.remove('hidden');
+function displayLoader() {
+	loadingIndicator.classList.remove('hidden')
 }
 
-function hideLoader() {
-  loader.classList.add('hidden');
+function hideLoadingIndicator() {
+	loadingIndicator.classList.add('hidden')
 }
 
-export { createGallery, clearGallery, showLoader, hideLoader };
+export { displayLoader, hideLoadingIndicator, renderImageGallery, resetGallery }
