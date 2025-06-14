@@ -11,7 +11,7 @@ let simplelightbox = new SimpleLightbox('.gallery-link', {
 })
 
 function createGallery(images) {
-	const markup = images
+	const markup = images.hits
 		.map(
 			({
 				webformatURL,
