@@ -1,18 +1,52 @@
 import iziToast from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 
-import { getImagesByQuery } from './js/pixabay-api'
+import fetchImageData from './js/pixabay-api'
 import {
-	clearGallery,
-	createGallery,
-	hideLoader,
-	showLoader,
+	displayGallery,
+	displayLoadingIndicator,
+	removeGalleryContent,
+	removeLoadingIndicator,
 } from './js/render-functions'
 
-const searchForm = document.querySelector('.form')
+const imageSearchForm = document.querySelector('.search-container')
 
-const displayNotification = (message, type = 'error') => {
-	iziToast[type]({
+imageSearchForm.addEventListener('submit', processImageSearch)
+
+function processImageSearch(event) {
+	event.preventDefault()
+
+	const searchInput = event.target.elements['search-text'].value.trim()
+
+	if (!searchInput) {
+		displayErrorMessage('Please enter a search query')
+		return
+	}
+
+	removeGalleryContent()
+	displayLoadingIndicator()
+
+	fetchImageData(searchInput)
+		.then(({ hits }) => {
+			if (hits.length === 0) {
+				displayInfoMessage(
+					'No images found. Please try a different search term.'
+				)
+				return
+			}
+			displayGallery(hits)
+		})
+		.catch(error => {
+			displayErrorMessage('Failed to fetch images. Please try again later.')
+		})
+		.finally(() => {
+			removeLoadingIndicator()
+			event.target.reset()
+		})
+}
+
+function displayErrorMessage(message) {
+	iziToast.error({
 		message,
 		position: 'topRight',
 		messageSize: '16px',
@@ -22,37 +56,13 @@ const displayNotification = (message, type = 'error') => {
 	})
 }
 
-const handleFormSubmit = async event => {
-	event.preventDefault()
-
-	const searchQuery = event.target.elements.searchQuery.value.trim()
-
-	if (!searchQuery) {
-		displayNotification('Please enter a search query')
-		return
-	}
-
-	clearGallery()
-	showLoader()
-
-	try {
-		const { hits } = await getImagesByQuery(searchQuery)
-
-		if (hits.length === 0) {
-			displayNotification(
-				'Sorry, there are no images matching your search query. Please try again!',
-				'info'
-			)
-			return
-		}
-
-		createGallery(hits)
-	} catch (error) {
-		displayNotification('Failed to fetch images. Please try again later.')
-	} finally {
-		hideLoader()
-		event.target.reset()
-	}
+function displayInfoMessage(message) {
+	iziToast.info({
+		message,
+		position: 'topRight',
+		messageSize: '16px',
+		messageLineHeight: '24px',
+		messageColor: '#fafafb',
+		closeOnClick: true,
+	})
 }
-
-searchForm.addEventListener('submit', handleFormSubmit)
