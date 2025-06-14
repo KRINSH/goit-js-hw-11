@@ -1,4 +1,3 @@
-import { glob } from 'glob'
 import SortCss from 'postcss-sort-media-queries'
 import { defineConfig } from 'vite'
 import FullReload from 'vite-plugin-full-reload'
@@ -10,10 +9,15 @@ export default defineConfig(({ command }) => {
 			[command === 'serve' ? 'global' : '_global']: {},
 		},
 		root: 'src',
+		base: '/goit-js-hw-11/',
 		build: {
 			sourcemap: true,
+			outDir: 'dist',
+			assetsDir: 'assets',
 			rollupOptions: {
-				input: glob.sync('./src/*.html'),
+				input: {
+					main: './src/index.html',
+				},
 				output: {
 					manualChunks(id) {
 						if (id.includes('node_modules')) {
@@ -34,7 +38,6 @@ export default defineConfig(({ command }) => {
 					},
 				},
 			},
-			outDir: '../dist',
 			emptyOutDir: true,
 		},
 		plugins: [
