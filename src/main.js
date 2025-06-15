@@ -9,9 +9,9 @@ import {
 	showLoader,
 } from './js/render-functions'
 
-const searchForm = document.querySelector('.search-form')
+const form = document.querySelector('.form')
 
-searchForm.addEventListener('submit', handleImageSearch)
+form.addEventListener('submit', handleImageSearch)
 
 hideLoader()
 
@@ -60,6 +60,6 @@ function handleImageSearch(event) {
 		)
 		.finally(() => {
 			hideLoader()
-			searchForm.reset()
+			form.reset()
 		})
 }

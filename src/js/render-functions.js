@@ -1,8 +1,8 @@
 import SimpleLightbox from 'simplelightbox'
 import 'simplelightbox/dist/simple-lightbox.min.css'
 
-const loader = document.querySelector('.loading-indicator')
-const gallery = document.querySelector('.image-gallery')
+const loader = document.querySelector('.loader')
+const gallery = document.querySelector('.gallery')
 
 let simplelightbox = new SimpleLightbox('.gallery-link', {
 	captionsData: 'alt',

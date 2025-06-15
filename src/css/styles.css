@@ -14,7 +14,7 @@
 /* Sections style */
 @import url('./loader.css');
 
-.image-gallery {
+.gallery {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 20px;
@@ -51,24 +51,20 @@
 	object-fit: cover;
 }
 
-.image-info {
+.image-inform {
 	display: flex;
 	justify-content: space-around;
 	padding: 10px;
 	background-color: #f8f8f8;
 }
 
-.info-item {
-	text-align: center;
-}
-
-.info-title {
+.image-inform-title {
 	font-size: 12px;
 	color: #666;
 	margin-bottom: 4px;
 }
 
-.info-text {
+.image-inform-text {
 	font-size: 14px;
 	color: #333;
 	font-weight: 500;
