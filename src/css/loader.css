@@ -2,7 +2,7 @@
 	display: none;
 }
 
-.loading-indicator {
+.loader {
 	transform: rotateZ(45deg);
 	perspective: 1000px;
 	border-radius: 50%;
@@ -11,8 +11,8 @@
 	color: #141cee;
 }
 
-.loading-indicator:before,
-.loading-indicator:after {
+.loader:before,
+.loader:after {
 	content: '';
 	display: block;
 
@@ -25,7 +25,7 @@
 	transform: rotateX(70deg);
 	animation: 1s spin linear infinite;
 }
-.loading-indicator:after {
+.loader:after {
 	color: #f0ec18;
 	transform: rotateY(70deg);
 	animation-delay: 0.4s;
